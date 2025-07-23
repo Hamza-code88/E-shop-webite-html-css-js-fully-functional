@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | E-Commerce</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">E-Shop</div>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>My Profile</h1>
+        <div class="profile-container">
+            <div class="profile-info">
+                <h2>Personal Information</h2>
+                <p><strong>Name:</strong> <span id="profileName"></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            </div>
+            <div class="order-history">
+                <h2>Order History</h2>
+                <div id="orderHistory">
+                    <!-- Order history will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
