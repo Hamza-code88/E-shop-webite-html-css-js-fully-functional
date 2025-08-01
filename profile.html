@@ -3,38 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | E-Commerce</title>
+    <title>My Profile | E-Commerce</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">E-Shop</div>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#" id="logoutBtn">Logout</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>ShopEasy</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li id="auth-link"><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <div class="container">
-        <h1>My Profile</h1>
-        <div class="profile-container">
-            <div class="profile-info">
-                <h2>Personal Information</h2>
-                <p><strong>Name:</strong> <span id="profileName"></span></p>
-                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-            </div>
-            <div class="order-history">
-                <h2>Order History</h2>
-                <div id="orderHistory">
-                    <!-- Order history will be loaded here -->
+
+    <main class="container">
+        <section class="profile-section">
+            <h2>My Profile</h2>
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder"></div>
+                        <h3 id="profile-name">User Name</h3>
+                    </div>
+                    <nav class="profile-menu">
+                        <ul>
+                            <li class="active"><a href="#" data-section="account">Account Details</a></li>
+                            <li><a href="#" data-section="orders">My Orders</a></li>
+                            <li><a href="#" data-section="addresses">Addresses</a></li>
+                            <li><a href="#" id="logout-link">Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-section-content" id="account-section">
+                        <h3>Account Details</h3>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="profile-name-input">Full Name</label>
+                                <input type="text" id="profile-name-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-password">New Password (leave blank to keep current)</label>
+                                <input type="password" id="profile-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-confirm-password">Confirm New Password</label>
+                                <input type="password" id="profile-confirm-password">
+                            </div>
+                            <button type="submit" class="btn">Update Profile</button>
+                        </form>
+                    </div>
+                    
+                    <div class="profile-section-content hidden" id="orders-section">
+                        <h3>My Orders</h3>
+                        <div class="orders-list" id="orders-list">
+                            <!-- Orders will be loaded here -->
+                            <p>You haven't placed any orders yet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section-content hidden" id="addresses-section">
+                        <h3>Saved Addresses</h3>
+                        <div class="addresses-list" id="addresses-list">
+                            <!-- Addresses will be loaded here -->
+                            <p>No saved addresses.</p>
+                        </div>
+                        <button class="btn" id="add-address-btn">Add New Address</button>
+                    </div>
                 </div>
             </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ShopEasy. All rights reserved.</p>
         </div>
-    </div>
-    <script src="js/script.js"></script>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            updateCartCount();
+            
+            
+            if (!getCurrentUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            
+            loadProfileData();
+            
+            document.querySelectorAll('.profile-menu a').forEach(link => {
+                if (link.id !== 'logout-link') {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.getAttribute('data-section');
+                        showProfileSection(section);
+                    });
+                }
+            });
+            
+           
+            document.getElementById('logout-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+          
+            document.getElementById('profile-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                updateProfile();
+            });
+            
+
+            document.getElementById('add-address-btn').addEventListener('click', () => {
+                addNewAddress();
+            });
+        });
+    </script>
 </body>
 </html>

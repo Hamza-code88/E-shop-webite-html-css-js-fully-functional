@@ -8,23 +8,62 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">E-Shop</div>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#" id="logoutBtn">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <h1>Our Products</h1>
-        <div class="products-grid" id="allProducts">
-            <!-- All products will be loaded here -->
+        <div class="container">
+            <h1>ShopEasy</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li id="auth-link"><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-    <script src="js/script.js"></script>
+    </header>
+
+    <main class="container">
+        <section class="products-section">
+            <h2>All Products</h2>
+            <div class="filter-options">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="home">Home & Kitchen</option>
+                </select>
+                <select id="sort-by">
+                    <option value="default">Default Sorting</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name-asc">Name: A to Z</option>
+                    <option value="name-desc">Name: Z to A</option>
+                </select>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ShopEasy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            updateCartCount();
+            loadAllProducts();
+       
+            document.getElementById('category-filter').addEventListener('change', loadAllProducts);
+            document.getElementById('sort-by').addEventListener('change', loadAllProducts);
+        });
+    </script>
 </body>
 </html>

@@ -8,82 +8,148 @@
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">E-Shop</div>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#" id="logoutBtn">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <h1>Checkout</h1>
-        <div class="checkout-container">
-            <div class="shipping-form">
-                <h2>Shipping Information</h2>
-                <form id="shippingForm">
-                    <div class="form-group">
-                        <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" id="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="zipCode">Zip Code</label>
-                        <input type="text" id="zipCode" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" id="country" required>
-                    </div>
-                </form>
-            </div>
-            <div class="payment-form">
-                <h2>Payment Information</h2>
-                <form id="paymentForm">
-                    <div class="form-group">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cardName">Name on Card</label>
-                        <input type="text" id="cardName" required>
-                    </div>
-                    <div class="form-group-row">
-                        <div class="form-group">
-                            <label for="expiryDate">Expiry Date</label>
-                            <input type="text" id="expiryDate" placeholder="MM/YY" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" required>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="order-summary">
-                <h2>Order Summary</h2>
-                <div class="summary-items" id="checkoutItems">
-                    <!-- Order items will be loaded here -->
-                </div>
-                <div class="summary-total">
-                    <p>Subtotal: $<span id="checkoutSubtotal">0.00</span></p>
-                    <p>Shipping: $<span id="checkoutShipping">5.00</span></p>
-                    <p>Total: $<span id="checkoutTotal">5.00</span></p>
-                </div>
-                <button id="placeOrderBtn" class="btn">Place Order</button>
-            </div>
+        <div class="container">
+            <h1>ShopEasy</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li id="auth-link"><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-    <script src="js/script.js"></script>
+    </header>
+
+    <main class="container">
+        <section class="checkout-section">
+            <h2>Checkout</h2>
+            <div class="checkout-container">
+                <div class="checkout-form">
+                    <form id="checkout-form">
+                        <h3>Shipping Information</h3>
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <!-- More countries can be added -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3>Payment Information</h3>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card</label>
+                            <input type="text" id="card-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn" id="place-order-btn">Place Order</button>
+                    </form>
+                </div>
+                <div class="order-summary">
+                    <h3>Your Order</h3>
+                    <div class="order-items" id="order-items">
+                        <!-- Order items will be loaded here -->
+                    </div>
+                    <div class="order-totals">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="order-subtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="order-shipping">$0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="order-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ShopEasy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            updateCartCount();
+            loadOrderSummary();
+            
+            // If cart is empty, redirect to products page
+            const cart = getCart();
+            if (cart.items.length === 0) {
+                window.location.href = 'products.html';
+            }
+            
+            // Pre-fill user info if logged in
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.getElementById('full-name').value = currentUser.name;
+                document.getElementById('email').value = currentUser.email;
+            }
+            
+            // Form submission
+            document.getElementById('checkout-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                processOrder();
+            });
+        });
+    </script>
 </body>
 </html>

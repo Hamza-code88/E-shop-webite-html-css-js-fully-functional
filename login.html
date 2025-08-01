@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | E-Commerce</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="logo">88-Shop</h1>
+            <h1>ShopEasy</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="login.html" id="auth-link">Login</a></li>
+                    <li id="auth-link"><a href="login.html">Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container">
+    <main class="container auth-container">
         <section class="auth-form">
-            <h2>Login to Your Account</h2>
+            <h2>Login</h2>
             <form id="login-form">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -36,17 +35,32 @@
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
-            <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
             <div id="login-error" class="error-message"></div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 88-Shop. All rights reserved.</p>
+            <p>&copy; 2023 ShopEasy. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            updateCartCount();
+            
+            const loginForm = document.getElementById('login-form');
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                loginUser(email, password);
+            });
+        });
+    </script>
 </body>
 </html>
